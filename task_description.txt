@@ -1,0 +1,53 @@
+Configurable Portable Logger
+Create dynamically configurable portable logger. Portable means it can be
+moved to any other platform without changing API. Classes can be added or
+removed to support any other desired platform. During initialization, developer
+should select where logger will print its messages: stdout, to the queue etc.
+Logger should have various of extensions that can be dynamically selected by
+developer during initialization time. Developer can add any combination of
+extensions in any order. Developer should be able to add new extensions
+without changing the implementation of logger or existing extensions.
+Requirements:
+• Logger should be written in C++ language using OOP paradigm. Usage of
+Design Patterns is recommended.
+• Test platform x86_64 Linux, Mac OS.
+• Logger should have different log levels: Fatal, Error, Info, Debug, Warning,
+Noise. Log level can be changed any time.
+• If the message log level is higher than the maximum allowed log level, it
+should not be printed.
+• Logger should be initialized before using. Initialization of logger should
+consist of selecting desired output and extensions. This configuration
+should not change during runtime.
+• Logger should support different types of output: stdout, sending the
+message to the queue etc.
+• Logger should have different extensions to the logging message:
+timestamp, thread name, log level label or additional output to the logger
+(for example, to the file).
+• The order of adding extensions may influence output format. For
+example:
+Extentions thread name, uptime, log level label will generate message like
+this:
+[<thread name>][<uptime>][<log level>]Test message
+Extentions log level label, uptime, thread name will generate message like
+this:
+[<log level>][<uptime>][<thread name>]Test message
+Extentions log level label will generate message like this:
+[<log level>]Test message
+• The only requirement to the order is that the same sequence of
+extensions will generate the same output for each run.
+• Logger should be extendable by adding new classes and without changing
+implementation of the existing one.
+• New logger outputs should be added to the logger by adding new classes.
+• New extensions should be added to the logger by adding new classes.
+• Create a factory with several predefined configurations of your choice.
+• Hardcode several messages and print them with different loggers created
+by the factory.
+• Logger should be easily ported to the new OS. Porting to new OS should
+be done by only creating new classes.
+• Cover logger with unit tests using any unit test library you prefer.
+Notes:
+• The build system for different OS is out of scope of this task.
+• Detection of thread name, uptime or any other platform specific data is
+out of scope of this task. It can be mocked by any hardcoded value.
+• Results can be shared in archive (preferably) or Github and contain
+compilation instructions.
